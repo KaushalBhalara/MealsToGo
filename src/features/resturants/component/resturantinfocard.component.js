@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const Title = styled.Text`
   padding: 10px;
-  color: red;
+  color: ${(props) => props.theme.colors.ui.primary};
 `;
 
 const ResturantCard = styled(Card)`
@@ -36,10 +36,3 @@ export const ResturantInfoCardComponent = ({ resturant = {} }) => {
     </ResturantCard>
   );
 };
-
-const styles = StyleSheet.create({
-  cover: {
-    padding: 10,
-    backgroundColor: "white",
-  },
-});

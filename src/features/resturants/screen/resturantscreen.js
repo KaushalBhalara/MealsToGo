@@ -11,7 +11,6 @@ const SearchContainer = styled.View`
 const ResturantListContainer = styled.View`
   flex: 1;
   padding: 16px;
-  background-color: red;
 `;
 
 const SafeArea = styled.SafeAreaView`
