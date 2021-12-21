@@ -5,12 +5,12 @@ import { ResturantInfoCardComponent } from "../component/resturantinfocard.compo
 import styled from "styled-components";
 
 const SearchContainer = styled.View`
-  padding: 16px;
+  padding: ${(props) => props.theme.space[3]}; ;
 `;
 
 const ResturantListContainer = styled.View`
   flex: 1;
-  padding: 16px;
+  padding: ${(props) => props.theme.space[3]}; ;
 `;
 
 const SafeArea = styled.SafeAreaView`
