@@ -25,13 +25,14 @@ export default function App() {
     Oswald_400Regular,
   });
 
-  const [] = useLato({
+  const [latoLoaded] = useLato({
     Lato_400Regular,
   });
 
-  if (!useOswald || !useLato) {
+  if (!oswaldLoaded || !latoLoaded) {
     return null;
   }
+
   return (
     <>
       <ThemeProvider theme={theme}>
