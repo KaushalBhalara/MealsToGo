@@ -17,13 +17,20 @@ const ResturantListContainer = styled.View`
 const SafeArea = styled.SafeAreaView`
   flex: 1;
 `;
+
+const ResturantList = styled(FlatList).attrs({
+  contentContainerStyle: {
+    padding: 16,
+  },
+})``;
+
 export const ResturantScreen = () => {
   return (
     <SafeArea>
       <SearchContainer>
         <Searchbar></Searchbar>
       </SearchContainer>
-      <FlatList
+      <ResturantList
         data={[
           { name: 1 },
           { name: 2 },
@@ -46,7 +53,6 @@ export const ResturantScreen = () => {
           </Spacer>
         )}
         keyExtractor={(item) => item.name}
-        contentContainerStyle={{ padding: 16 }}
       />
     </SafeArea>
   );
