@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { Card } from "react-native-paper";
 import styled from "styled-components";
 
@@ -7,6 +7,7 @@ import { Spacer } from "../../../components/spacer/spacercomponent";
 import { SvgXml } from "react-native-svg";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
+import { Text } from "../../../components/typography/textcomponent";
 
 const Title = styled.Text`
   font-family: ${(props) => props.theme.fonts.heading};
@@ -68,7 +69,7 @@ export const ResturantInfoCardComponent = ({ resturant = {} }) => {
     <ResturantCard elevation={5}>
       <ResturantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
-        <Title>{name}</Title>
+        <Text variant="body">{name}</Text>
         <SectionView>
           <RatingView>
             {ratingArray.map(() => (
