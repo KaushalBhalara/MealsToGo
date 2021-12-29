@@ -15,6 +15,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
+import { resturantRequest } from "./src/services/resturants/resturants.service";
+
 import {
   useFonts as useOswald,
   Oswald_400Regular,
