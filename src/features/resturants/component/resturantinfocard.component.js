@@ -57,7 +57,7 @@ export const ResturantInfoCardComponent = ({ resturant = {} }) => {
           </OpenView>
         </SectionView>
 
-        <Address>{address}</Address>
+        <Address>{resturant.vicinity}</Address>
       </Info>
     </ResturantCard>
   );
