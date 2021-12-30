@@ -15,7 +15,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
-import { resturantRequest } from "./src/services/resturants/resturants.service";
+import { RestaurantsContextProvider } from "./src/services/resturants/resturant.context";
 
 import {
   useFonts as useOswald,
@@ -61,19 +61,21 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={createScreenOptions}
-            tabBarOptions={{
-              activeTintColor: "tomato",
-              inactiveTintColor: "gray",
-            }}
-          >
-            <Tab.Screen name="Resturants" component={ResturantScreen} />
-            <Tab.Screen name="Map" component={MapScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <RestaurantsContextProvider>
+          <NavigationContainer>
+            <Tab.Navigator
+              screenOptions={createScreenOptions}
+              tabBarOptions={{
+                activeTintColor: "tomato",
+                inactiveTintColor: "gray",
+              }}
+            >
+              <Tab.Screen name="Resturants" component={ResturantScreen} />
+              <Tab.Screen name="Map" component={MapScreen} />
+              <Tab.Screen name="Settings" component={SettingsScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </RestaurantsContextProvider>
       </ThemeProvider>
       <ExpoStausBar style="auto" />
     </>

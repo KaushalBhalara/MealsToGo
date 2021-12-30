@@ -10,15 +10,22 @@ export const resturantRequest = (location = "51.219448,4.402464") => {
   });
 };
 
-const resturantTransfom = (result) => {
-  const newResult = camelize(result);
-  return newResult;
-};
-resturantRequest()
-  .then(resturantTransfom)
-  .then((transformedResponse) => {
-    console.log(transformedResponse);
-  })
-  .catch((error) => {
-    console.log("Error");
+export const resturantTransfom = ({ results = [] }) => {
+  const mappedResult = results.map((restaurant) => {
+    return {
+      ...restaurant,
+      isOpenNow: restaurant.opening_hours && restaurant.opening_hours.open_now,
+      isClosedTemporarily: restaurant.business_status === "CLOSED_TEMPORARILY",
+    };
   });
+  console.log(mappedResult[0]);
+  return results;
+};
+// resturantRequest()
+//   .then(resturantTransfom)
+//   .then((transformedResponse) => {
+//     // console.log(transformedResponse);
+//   })
+//   .catch((error) => {
+//     console.log("Error");
+//   });
