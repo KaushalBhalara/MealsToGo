@@ -8,6 +8,7 @@ import {
   RestaurantsContext,
   RestaurantsContextProvider,
 } from "../../../services/resturants/resturant.context";
+import { ActivityIndicator, Colors } from "react-native-paper";
 
 const SearchContainer = styled.View`
   padding: ${(props) => props.theme.space[3]}; ;
@@ -28,12 +29,30 @@ const ResturantList = styled(FlatList).attrs({
   },
 })``;
 
+const Loadercontainer = styled.View`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+`;
+
+const Loading = styled(ActivityIndicator)`
+  margin-left: -25px;
+`;
 export const ResturantScreen = () => {
   const { error, isLoading, restaurants } = useContext(RestaurantsContext);
   console.log(error);
 
   return (
     <SafeArea>
+      {isLoading && (
+        <Loadercontainer>
+          <Loading
+            size={50}
+            animating={true}
+            color={(props) => props.theme.colors.brand.primary}
+          />
+        </Loadercontainer>
+      )}
       <SearchContainer>
         <Searchbar></Searchbar>
       </SearchContainer>
