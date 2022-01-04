@@ -11,7 +11,6 @@ const ResturantStack = createStackNavigator();
 export const ResturantNavigator = () => {
   return (
     <ResturantStack.Navigator
-      headerMode="none"
       screenOptions={{
         ...TransitionPresets.ModalSlideFromBottomIOS,
       }}
@@ -20,6 +19,7 @@ export const ResturantNavigator = () => {
       <ResturantStack.Screen
         name="ResturantDetail"
         component={ResturantDetail}
+        options={({ route }) => ({ title: route.params.resturant.name })}
       />
     </ResturantStack.Navigator>
   );
