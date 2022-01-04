@@ -3,5 +3,6 @@ import { ResturantInfoCardComponent } from "../component/resturantinfocard.compo
 
 export const ResturantDetail = ({ route }) => {
   const { resturant } = route.params;
+
   return <ResturantInfoCardComponent resturant={resturant} />;
 };
