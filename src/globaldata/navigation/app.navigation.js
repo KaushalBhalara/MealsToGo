@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { ResturantScreen } from "../../features/resturants/screen/resturantscreen";
 import { Text } from "react-native";
 import { ResturantNavigator } from "./rasturant.navigation";
+import { MapScreen } from "../../features/map/screens/map.screen";
 
 const TAB_ICON = {
   Resturants: "md-restaurant",
@@ -15,8 +16,6 @@ const TAB_ICON = {
 const Tab = createBottomTabNavigator();
 
 const SettingsScreen = () => <Text>Settings</Text>;
-
-const MapScreen = () => <Text>Map</Text>;
 
 const createScreenOptions = ({ route }) => {
   const iconName = TAB_ICON[route.name];
@@ -41,7 +40,11 @@ export const AppNavigator = () => (
         component={ResturantNavigator}
         options={{ headerShown: false }}
       />
-      <Tab.Screen name="Map" component={MapScreen} />
+      <Tab.Screen
+        name="Map"
+        component={MapScreen}
+        options={{ headerShown: true }}
+      />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   </NavigationContainer>
