@@ -4,13 +4,14 @@ import { SearchComponentMap } from "../component/search.component";
 import styled from "styled-components";
 import { LocationContext } from "../../../services/locations/location.context";
 import { RestaurantsContext } from "../../../services/resturants/resturant.context";
+import { MapCallout } from "../component/mapcallout.component";
 
 const Map = styled(MapView)`
     height:100%
     width:100%
 `;
 
-export const MapScreen = () => {
+export const MapScreen = ({ navigation }) => {
   const { location } = useContext(LocationContext);
   const { restaurants = [] } = useContext(RestaurantsContext);
 
@@ -35,7 +36,24 @@ export const MapScreen = () => {
         }}
       >
         {restaurants.map((resturant) => {
-          return null;
+          return (
+            <MapView.Marker
+              key={resturant.name}
+              title={resturant.name}
+              coordinate={{
+                latitude: resturant.geometry.location.lat,
+                longitude: resturant.geometry.location.lng,
+              }}
+            >
+              <MapView.Callout
+                onPress={() =>
+                  navigation.navigate("ResturantDetail", { resturant })
+                }
+              >
+                <MapCallout resturant={resturant}></MapCallout>
+              </MapView.Callout>
+            </MapView.Marker>
+          );
         })}
       </Map>
     </>
