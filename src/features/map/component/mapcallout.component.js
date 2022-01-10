@@ -6,5 +6,7 @@ import { CompactResturantCard } from "../../resturants/component/compact.restura
 const MyText = styled.Text``;
 
 export const MapCallout = ({ resturant }) => {
-  return <CompactResturantCard resturant={resturant}></CompactResturantCard>;
+  return (
+    <CompactResturantCard isMap resturant={resturant}></CompactResturantCard>
+  );
 };
