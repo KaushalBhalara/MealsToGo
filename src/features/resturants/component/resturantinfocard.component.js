@@ -18,6 +18,7 @@ import {
   SectionView,
   OpenView,
 } from "./resturantcardinfoStyle";
+import { Favourite } from "../../../components/favourites/favourites.components";
 
 export const ResturantInfoCardComponent = ({ resturant = {} }) => {
   const {
@@ -36,6 +37,7 @@ export const ResturantInfoCardComponent = ({ resturant = {} }) => {
   const ratingArray = Array.from(new Array(Math.floor(rating)));
   return (
     <ResturantCard elevation={5}>
+      <Favourite resturant={resturant} />
       <ResturantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Text variant="body">{name}</Text>

@@ -14,6 +14,7 @@ import { theme } from "./src/globaldata/theme";
 
 import { RestaurantsContextProvider } from "./src/services/resturants/resturant.context";
 import { LocationContextProvider } from "./src/services/locations/location.context";
+import { FavouritesContextProvider } from "./src/services/favourites/favourites.contect";
 
 import {
   useFonts as useOswald,
@@ -39,11 +40,13 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <LocationContextProvider>
-          <RestaurantsContextProvider>
-            <Navigation />
-          </RestaurantsContextProvider>
-        </LocationContextProvider>
+        <FavouritesContextProvider>
+          <LocationContextProvider>
+            <RestaurantsContextProvider>
+              <Navigation />
+            </RestaurantsContextProvider>
+          </LocationContextProvider>
+        </FavouritesContextProvider>
       </ThemeProvider>
       <ExpoStausBar style="auto" />
     </>
