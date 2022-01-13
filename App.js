@@ -53,7 +53,7 @@ export default function App() {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user.providerData[0].email);
+          // console.log(user.providerData[0].email);
           setIsAuthenticated(true);
           // ...
         })
