@@ -17,6 +17,46 @@ export const AuthenticationContextProvider = ({ children }) => {
     setError(null);
   };
 
+  const onRegistration = (email, password, repassword) => {
+    if (!email) {
+      setError("Please Enter Email Id");
+      return;
+    } else {
+      var pattern = new RegExp(
+        /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+      );
+      if (!pattern.test(email)) {
+        setError("Please Enter Valid Email Id");
+        return;
+      }
+    }
+    if (!password) {
+      setError("Please Enter Password");
+      return;
+    }
+    if (!repassword) {
+      setError("Please Enter Re-Password");
+      return;
+    }
+    if (password !== repassword) {
+      setError("Password Mismatch. Please Enter correct password");
+      return;
+    }
+
+    setIsLoading(true);
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setUser(user);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setError(error.toString());
+      });
+  };
+
   const onLogin = (email, password) => {
     if (!email) {
       setError("Please Enter Email Id");
@@ -71,6 +111,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         isAuthenticated: !!user,
         onLogin,
         dataReset,
+        onRegistration,
       }}
     >
       {children}
