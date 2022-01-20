@@ -23,8 +23,8 @@ export const AccountContainer = styled.View`
   padding: ${(props) => props.theme.space[4]};
   margin-top: ${(props) => props.theme.space[2]};
   border-color: rgba(0, 0, 0, 0.3);
-  border-width: 1;
-  border-radius: 10;
+  border-width: 1px;
+  border-radius: 10px;
 `;
 
 export const AuthButton = styled(Button).attrs({
