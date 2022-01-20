@@ -12,9 +12,6 @@ import {
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/globaldata/theme";
 
-import { RestaurantsContextProvider } from "./src/services/resturants/resturant.context";
-import { LocationContextProvider } from "./src/services/locations/location.context";
-import { FavouritesContextProvider } from "./src/services/favourites/favourites.contect";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 
 import { initializeApp } from "firebase/app";
@@ -46,24 +43,24 @@ initializeApp(firebaseConfig);
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const auth = getAuth();
-  useEffect(() => {
-    setTimeout(() => {
-      signInWithEmailAndPassword(auth, "Kaushal@gmail.com", "password")
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          // console.log(user.providerData[0].email);
-          setIsAuthenticated(true);
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorMessage);
-        });
-    }, 2000);
-  }, []);
+  // const auth = getAuth();
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     signInWithEmailAndPassword(auth, "Kaushal@gmail.com", "password")
+  //       .then((userCredential) => {
+  //         // Signed in
+  //         const user = userCredential.user;
+  //         // console.log(user.providerData[0].email);
+  //         setIsAuthenticated(true);
+  //         // ...
+  //       })
+  //       .catch((error) => {
+  //         const errorCode = error.code;
+  //         const errorMessage = error.message;
+  //         console.log(errorMessage);
+  //       });
+  //   }, 2000);
+  // }, []);
 
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
@@ -76,19 +73,13 @@ export default function App() {
   if (!oswaldLoaded || !latoLoaded) {
     return null;
   }
-  if (!isAuthenticated) return null;
+  // if (!isAuthenticated) return null;
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <FavouritesContextProvider>
-            <LocationContextProvider>
-              <RestaurantsContextProvider>
-                <Navigation />
-              </RestaurantsContextProvider>
-            </LocationContextProvider>
-          </FavouritesContextProvider>
+          <Navigation />
         </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStausBar style="auto" />

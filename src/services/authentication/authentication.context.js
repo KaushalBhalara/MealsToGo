@@ -15,17 +15,17 @@ export const AuthenticationContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
-  const isUserLogin = () => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-        setIsLoading(false);
-      } else {
-        setIsLoading(false);
-      }
-    });
-  };
+  // const isUserLogin = () => {
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUser(user);
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
+  });
+  // };
 
   const dataReset = () => {
     setError(null);
@@ -114,9 +114,11 @@ export const AuthenticationContextProvider = ({ children }) => {
       .then(() => {
         setUser(null);
         setIsLoading(false);
+        setError(null);
       })
-      .catch(() => {
+      .catch((error) => {
         setIsLoading(false);
+        setError(error);
       });
   };
 
@@ -126,6 +128,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         isLoading,
         error,
         isAuthenticated: !!user,
+        user,
         onLogin,
         dataReset,
         onRegistration,
