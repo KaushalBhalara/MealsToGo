@@ -4,6 +4,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 
 export const AuthenticationContext = createContext();
@@ -12,6 +14,18 @@ export const AuthenticationContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+
+  const isUserLogin = () => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+        setIsLoading(false);
+      } else {
+        setIsLoading(false);
+      }
+    });
+  };
 
   const dataReset = () => {
     setError(null);
@@ -91,16 +105,19 @@ export const AuthenticationContextProvider = ({ children }) => {
         setError(error.toString());
         console.log(error.message);
       });
-    // LoginRequest(email, password)
-    //   .then((u) => {
-    //     setIsLoading(false);
-    //     setUser(u);
-    //   })
-    //   .catch((e) => {
-    //     setIsLoading(false);
-    //     setError(e);
-    //     setError(e.toString());
-    //   });
+  };
+
+  const onLogout = () => {
+    setIsLoading(true);
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        setUser(null);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -112,6 +129,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         onLogin,
         dataReset,
         onRegistration,
+        onLogout,
       }}
     >
       {children}

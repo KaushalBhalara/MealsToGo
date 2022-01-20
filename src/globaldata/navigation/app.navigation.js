@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { ResturantScreen } from "../../features/resturants/screen/resturantscreen";
-import { Text } from "react-native";
+import { Text, Button } from "react-native";
 import { ResturantNavigator } from "./rasturant.navigation";
 import { MapScreen } from "../../features/map/screens/map.screen";
+import { AuthenticationContext } from "../../services/authentication/authentication.context";
 
 const TAB_ICON = {
   Resturants: "md-restaurant",
@@ -14,7 +15,15 @@ const TAB_ICON = {
 
 const Tab = createBottomTabNavigator();
 
-const SettingsScreen = () => <Text>Settings</Text>;
+const SettingsScreen = () => {
+  const { onLogout } = useContext(AuthenticationContext);
+  return (
+    <>
+      <Text>Settings</Text>
+      <Button title="Logout" onPress={() => onLogout()} />
+    </>
+  );
+};
 
 const createScreenOptions = ({ route }) => {
   const iconName = TAB_ICON[route.name];
