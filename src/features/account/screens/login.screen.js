@@ -7,18 +7,21 @@ import {
   AuthInput,
   AccountContainer,
   AccountCover,
+  Title,
+  ErrorContainer,
 } from "../component/account.style";
 
 import { Text } from "../../../components/typography/textcomponent";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
-export const LoginScreen = () => {
+export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { error, onLogin } = useContext(AuthenticationContext);
+  const { error, onLogin, dataReset } = useContext(AuthenticationContext);
 
   return (
     <AccountBackground>
+      <Title>Meals to Go</Title>
       <AccountCover />
       <AccountContainer>
         <AuthInput
@@ -41,9 +44,9 @@ export const LoginScreen = () => {
         />
         <Spacer size="large" />
         {error && (
-          <Spacer size="large">
+          <ErrorContainer>
             <Text variant="error">{error}</Text>
-          </Spacer>
+          </ErrorContainer>
         )}
         <Spacer size="large" />
         <AuthButton
@@ -54,6 +57,16 @@ export const LoginScreen = () => {
           Login
         </AuthButton>
       </AccountContainer>
+      <Spacer size="large" />
+      <AuthButton
+        mode="contained"
+        onPress={() => {
+          dataReset();
+          navigation.goBack();
+        }}
+      >
+        Back
+      </AuthButton>
     </AccountBackground>
   );
 };
