@@ -12,7 +12,7 @@ const AvtarContainer = styled.View`
 const SettingItem = styled(List.Item)`
   padding: ${(props) => props.theme.space[2]};
 `;
-export const SettingsScreen = () => {
+export const SettingsScreen = ({ navigation }) => {
   const { onLogout, user } = useContext(AuthenticationContext);
   return (
     <>
@@ -29,6 +29,7 @@ export const SettingsScreen = () => {
           title="Favourites"
           description="View your favourites"
           left={(props) => <List.Icon {...props} color="black" icon="heart" />}
+          onPress={() => navigation.navigate("Favourites")}
         />
         <SettingItem
           style={{ padding: 16 }}
