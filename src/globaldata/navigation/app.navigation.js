@@ -5,10 +5,10 @@ import { ResturantScreen } from "../../features/resturants/screen/resturantscree
 import { Text, Button } from "react-native";
 import { ResturantNavigator } from "./rasturant.navigation";
 import { MapScreen } from "../../features/map/screens/map.screen";
-import { AuthenticationContext } from "../../services/authentication/authentication.context";
 import { RestaurantsContextProvider } from "../../services/resturants/resturant.context";
 import { LocationContextProvider } from "../../services/locations/location.context";
 import { FavouritesContextProvider } from "../../services/favourites/favourites.contect";
+import { SettingsNavigator } from "./settings.navigator";
 
 const TAB_ICON = {
   Resturants: "md-restaurant",
@@ -17,16 +17,6 @@ const TAB_ICON = {
 };
 
 const Tab = createBottomTabNavigator();
-
-const SettingsScreen = () => {
-  const { onLogout } = useContext(AuthenticationContext);
-  return (
-    <>
-      <Text>Settings</Text>
-      <Button title="Logout" onPress={() => onLogout()} />
-    </>
-  );
-};
 
 const createScreenOptions = ({ route }) => {
   const iconName = TAB_ICON[route.name];
@@ -58,7 +48,7 @@ export const AppNavigator = () => (
             component={MapScreen}
             options={{ headerShown: true }}
           />
-          <Tab.Screen name="Settings" component={SettingsScreen} />
+          <Tab.Screen name="Settings" component={SettingsNavigator} />
         </Tab.Navigator>
       </RestaurantsContextProvider>
     </LocationContextProvider>
