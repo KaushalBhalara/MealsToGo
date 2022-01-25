@@ -12,6 +12,7 @@ import { FavouritesContext } from "../../../services/favourites/favourites.conte
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { SearchComponent } from "../component/search.component";
 import { FavouritesBar } from "../../../components/favourites/favouritesBar";
+import { FadeInView } from "../../../components/animations/fade.animations";
 
 const ResturantListContainer = styled.View`
   flex: 1;
@@ -75,7 +76,9 @@ export const ResturantScreen = ({ navigation }) => {
             }
           >
             <Spacer position="bottom" size="large">
-              <ResturantInfoCardComponent resturant={item} />
+              <FadeInView>
+                <ResturantInfoCardComponent resturant={item} />
+              </FadeInView>
             </Spacer>
           </TouchableOpacity>
         )}
